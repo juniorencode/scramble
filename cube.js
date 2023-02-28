@@ -3,9 +3,9 @@ const cube = {
     x: 160,
     y: 0,
     content: [
-      [{ color: '#fff' }, { color: '#fff' }, { color: '#fff' }],
-      [{ color: '#fff' }, { color: '#fff' }, { color: '#fff' }],
-      [{ color: '#fff' }, { color: '#fff' }, { color: '#fff' }]
+      [{ color: 'white' }, { color: 'white' }, { color: 'white' }],
+      [{ color: 'white' }, { color: 'white' }, { color: 'white' }],
+      [{ color: 'white' }, { color: 'white' }, { color: 'white' }]
     ]
   },
   face2: {
@@ -21,7 +21,7 @@ const cube = {
     x: 160,
     y: 160,
     content: [
-      [{ color: 'peru' }, { color: 'green' }, { color: 'green' }],
+      [{ color: 'green' }, { color: 'green' }, { color: 'green' }],
       [{ color: 'green' }, { color: 'green' }, { color: 'green' }],
       [{ color: 'green' }, { color: 'green' }, { color: 'green' }]
     ]
