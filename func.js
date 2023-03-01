@@ -23,14 +23,14 @@ const print = () => {
           size
         );
 
-        ctx.fillStyle = 'black';
+        // ctx.fillStyle = 'black';
 
-        ctx.font = '20px serif';
-        ctx.fillText(
-          `[${i}, ${j}]`,
-          cube[attr].x + 4 + j * size,
-          cube[attr].y + 25 + i * size
-        );
+        // ctx.font = '20px serif';
+        // ctx.fillText(
+        //   `[${cube[attr].content[i][j].y}, ${cube[attr].content[i][j].x}]`,
+        //   cube[attr].x + 4 + j * size,
+        //   cube[attr].y + 25 + i * size
+        // );
       }
     }
   }
@@ -190,26 +190,26 @@ const moveF = type => {
     cube.face3.content = matrix;
 
     matrix = [
-      cube.face1.content[0][2],
-      cube.face1.content[1][2],
+      cube.face1.content[2][0],
+      cube.face1.content[2][1],
       cube.face1.content[2][2]
     ];
 
-    cube.face1.content[0][2] = cube.face5.content[2][0];
-    cube.face1.content[1][2] = cube.face5.content[1][0];
-    cube.face1.content[2][2] = cube.face5.content[0][0];
+    cube.face1.content[2][0] = cube.face4.content[0][0];
+    cube.face1.content[2][1] = cube.face4.content[1][0];
+    cube.face1.content[2][2] = cube.face4.content[2][0];
 
-    cube.face5.content[2][0] = cube.face6.content[2][2];
-    cube.face5.content[1][0] = cube.face6.content[1][2];
-    cube.face5.content[0][0] = cube.face6.content[0][2];
+    cube.face4.content[2][0] = cube.face6.content[0][0];
+    cube.face4.content[1][0] = cube.face6.content[0][1];
+    cube.face4.content[0][0] = cube.face6.content[0][2];
 
-    cube.face6.content[2][2] = cube.face3.content[2][2];
-    cube.face6.content[1][2] = cube.face3.content[1][2];
-    cube.face6.content[0][2] = cube.face3.content[0][2];
+    cube.face6.content[0][0] = cube.face2.content[0][2];
+    cube.face6.content[0][1] = cube.face2.content[1][2];
+    cube.face6.content[0][2] = cube.face2.content[2][2];
 
-    cube.face3.content[2][2] = matrix[2];
-    cube.face3.content[1][2] = matrix[1];
-    cube.face3.content[0][2] = matrix[0];
+    cube.face2.content[2][2] = matrix[0];
+    cube.face2.content[1][2] = matrix[1];
+    cube.face2.content[0][2] = matrix[2];
   }
 };
 
@@ -350,4 +350,111 @@ const moveD = type => {
     cube.face3.content[2] = cube.face4.content[2];
     cube.face4.content[2] = matrix;
   }
+};
+
+const alter = [
+  'U',
+  "U'",
+  'U2',
+  'L',
+  "L'",
+  'L2',
+  'F',
+  "F'",
+  'F2',
+  'R',
+  "R'",
+  'R2',
+  'B',
+  "B'",
+  'B2',
+  'D',
+  "D'",
+  'D2'
+];
+const generator = () => {
+  let results = [];
+  let aux = '';
+  while (results.length <= 20) {
+    let random = Math.floor(Math.random() * 18);
+    let aux1 = new RegExp(
+      alter[random].length > 1 ? alter[random][0] : alter[random]
+    );
+
+    if (!aux1.test(aux)) {
+      results.push(alter[random]);
+      aux = alter[random];
+    }
+  }
+  divScramble.innerText = results.join(' ');
+  return results;
+};
+
+const scrambleCube = () => {
+  scramble.map(elem => {
+    switch (elem) {
+      case 'U':
+        moveU(1);
+        break;
+      case "U'":
+        moveU(2);
+        break;
+      case 'L':
+        moveL(1);
+        break;
+      case "L'":
+        moveL(2);
+        break;
+      case 'F':
+        moveF(1);
+        break;
+      case "F'":
+        moveF(2);
+        break;
+      case 'R':
+        moveR(1);
+        break;
+      case "R'":
+        moveR(2);
+        break;
+      case 'B':
+        moveB(1);
+        break;
+      case "B'":
+        moveB(2);
+        break;
+      case 'D':
+        moveD(1);
+        break;
+      case "D'":
+        moveD(2);
+        break;
+      case 'U2':
+        moveU(1);
+        moveU(1);
+        break;
+      case 'L2':
+        moveL(1);
+        moveL(1);
+        break;
+      case 'F2':
+        moveF(1);
+        moveF(1);
+        break;
+      case 'R2':
+        moveR(1);
+        moveR(1);
+        break;
+      case 'B2':
+        moveB(1);
+        moveB(1);
+        break;
+      case 'D2':
+        moveD(1);
+        moveD(1);
+        break;
+      default:
+        break;
+    }
+  });
 };
